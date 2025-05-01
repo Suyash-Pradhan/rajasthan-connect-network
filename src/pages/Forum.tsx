@@ -122,7 +122,8 @@ export default function Forum() {
         title: values.title,
         content: values.content,
         category: values.category,
-        tags: values.tags,
+        // Fix: Ensure tags is properly typed as string[]
+        tags: values.tags || [],
       });
       
       form.reset();

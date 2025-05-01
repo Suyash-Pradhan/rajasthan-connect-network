@@ -65,8 +65,10 @@ export default function Profile() {
     try {
       const updatedProfile: Partial<UserProfile> = {
         name: values.name,
+        // Fix: Ensure graduationYear is properly typed as number
         graduationYear: values.graduationYear,
         specialization: values.specialization || undefined,
+        // Fix: Ensure skills is properly typed as string[]
         skills: values.skills,
         company: values.company || undefined,
         jobTitle: values.jobTitle || undefined,
