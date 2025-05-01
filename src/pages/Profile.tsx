@@ -27,9 +27,11 @@ import { UserProfile } from "@/types/user";
 
 const profileSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  graduationYear: z.string().optional().transform((val) => val ? parseInt(val) : undefined),
+  graduationYear: z.string().optional()
+    .transform((val) => val ? parseInt(val) : undefined),
   specialization: z.string().optional(),
-  skills: z.string().optional().transform((val) => val ? val.split(",").map(s => s.trim()) : undefined),
+  skills: z.string().optional()
+    .transform((val) => val ? val.split(",").map(s => s.trim()) : []),
   company: z.string().optional(),
   jobTitle: z.string().optional(),
   bio: z.string().optional(),
@@ -65,10 +67,8 @@ export default function Profile() {
     try {
       const updatedProfile: Partial<UserProfile> = {
         name: values.name,
-        // Fix: Ensure graduationYear is properly typed as number
         graduationYear: values.graduationYear,
         specialization: values.specialization || undefined,
-        // Fix: Ensure skills is properly typed as string[]
         skills: values.skills,
         company: values.company || undefined,
         jobTitle: values.jobTitle || undefined,

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Card,
@@ -57,7 +56,7 @@ const postFormSchema = z.object({
     message: "Content must be at least 10 characters",
   }),
   category: z.enum(["general", "academic", "career", "technical"]),
-  tags: z.string().optional().transform(val => val ? val.split(',').map(t => t.trim()) : undefined),
+  tags: z.string().optional().transform(val => val ? val.split(',').map(t => t.trim()) : []),
 });
 
 export default function Forum() {
@@ -122,8 +121,7 @@ export default function Forum() {
         title: values.title,
         content: values.content,
         category: values.category,
-        // Fix: Ensure tags is properly typed as string[]
-        tags: values.tags || [],
+        tags: values.tags,
       });
       
       form.reset();
