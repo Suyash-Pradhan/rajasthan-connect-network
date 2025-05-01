@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				rajasthan: {
+					orange: '#FF7F2A',
+					blue: '#0A66C2',
+					brown: '#8B4513',
+					sand: '#F5DEB3',
+					maroon: '#800000'
 				}
 			},
 			borderRadius: {
