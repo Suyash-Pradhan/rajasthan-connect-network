@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+// Define proper types for the form schema
 const postFormSchema = z.object({
   title: z.string().min(5, {
     message: "Title must be at least 5 characters",
@@ -41,8 +42,13 @@ const postFormSchema = z.object({
     message: "Content must be at least 10 characters",
   }),
   category: z.enum(["general", "academic", "career", "technical"]),
-  tags: z.string().optional().transform(val => val ? val.split(',').map(t => t.trim()) : []),
+  tags: z.string().optional().transform(val => 
+    val ? val.split(',').map(t => t.trim()) : []
+  ),
 });
+
+// Extract the type from the schema
+type PostFormValues = z.infer<typeof postFormSchema>;
 
 interface CreatePostFormProps {
   setDialogOpen: (open: boolean) => void;
@@ -54,7 +60,7 @@ export const CreatePostForm = ({ setDialogOpen }: CreatePostFormProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<z.infer<typeof postFormSchema>>({
+  const form = useForm<PostFormValues>({
     resolver: zodResolver(postFormSchema),
     defaultValues: {
       title: "",
@@ -64,7 +70,7 @@ export const CreatePostForm = ({ setDialogOpen }: CreatePostFormProps) => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof postFormSchema>) {
+  async function onSubmit(values: PostFormValues) {
     if (!user) {
       toast({
         title: "Authentication required",

@@ -1,7 +1,6 @@
-
 export type UserRole = "admin" | "alumni" | "student";
 
-export interface UserProfile {
+export interface User {
   id: string;
   email: string;
   name: string;
@@ -21,6 +20,9 @@ export interface UserProfile {
   profileImage?: string;
   createdAt: string;
 }
+
+// Keep UserProfile as an alias to User for backward compatibility
+export type UserProfile = User;
 
 export interface MentorshipRequest {
   id: string;
@@ -52,7 +54,7 @@ export interface ForumComment {
 }
 
 export interface AuthState {
-  user: UserProfile | null;
+  user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
 }
